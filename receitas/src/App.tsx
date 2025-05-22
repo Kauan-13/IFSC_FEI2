@@ -1,3 +1,4 @@
+import "./App.css"
 import Cabecalho from "./componentes/Cabecalho";
 import Principal from "./componentes/Principal";
 

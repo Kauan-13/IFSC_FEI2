@@ -6,3 +6,13 @@
     border-radius: 10px;
     transition: 250ms ease-in-out;
 }
+
+.receita h2 {
+    text-align: center;
+}
+
+.receita-rodape {
+    margin-top: 1em;
+    display: flex;
+    justify-content: space-between;
+}

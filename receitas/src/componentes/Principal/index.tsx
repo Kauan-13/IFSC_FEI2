@@ -1,10 +1,11 @@
 import "./style.css"
 
 import Receita from "../Receita";
+import type { IReceita } from "../../interfaces/Receita";
 
 const Principal = () => {
 
-    const receitas = [{
+    const receitas: IReceita[] = [{
         nome: "Salmão Assado",
         ingredientes: [
             { nome: "Salmão", quantidade: 1, medida: "grande" },
@@ -42,7 +43,12 @@ const Principal = () => {
     return (
         <main className="receitas">
             {receitas.map((receita, i) => (
-                <Receita key={i} nome={receita.nome} ingredientes={receita.ingredientes} instrucoes={receita.instrucoes} />
+                <Receita 
+                    key={i} 
+                    nome={receita.nome} 
+                    ingredientes={receita.ingredientes} 
+                    instrucoes={receita.instrucoes} 
+                />
             ))}
         </main>
     )

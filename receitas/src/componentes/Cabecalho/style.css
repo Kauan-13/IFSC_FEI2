@@ -1,0 +1,8 @@
+header {
+    width: 100vw;
+    height: 5em;
+    background-color: lightblue;
+
+    line-height: 5em;
+    vertical-align: center;
+}

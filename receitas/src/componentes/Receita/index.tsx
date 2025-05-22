@@ -1,18 +1,9 @@
+import type { IReceita } from "../../interfaces/Receita"
+import { FaRegTrashAlt } from "react-icons/fa";
 import "./style.css"
+import Avaliacao from "../Avaliacao";
 
-interface Ingredientes {
-    nome: string,
-    quantidade: number,
-    medida: string
-}
-
-interface Props {
-    nome: string,
-    ingredientes: Ingredientes[],
-    instrucoes: string[]
-}
-
-const Receita = ({ nome, ingredientes, instrucoes }: Props) => {
+const Receita = ({ nome, ingredientes, instrucoes }: IReceita) => {
     return (
         <article className="receita">
             <h2>{nome}</h2>
@@ -28,6 +19,10 @@ const Receita = ({ nome, ingredientes, instrucoes }: Props) => {
                     <li key={i}>{instrucao}</li>
                 ))}
             </ol>
+            <div className="receita-rodape">
+                <Avaliacao/>
+                <FaRegTrashAlt />
+            </div>
         </article>
     )
 }
