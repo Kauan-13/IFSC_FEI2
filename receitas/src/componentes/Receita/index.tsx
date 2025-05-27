@@ -1,9 +1,24 @@
-import type { IReceita } from "../../interfaces/Receita"
 import { FaRegTrashAlt } from "react-icons/fa";
+import { BiEditAlt } from "react-icons/bi";
+
 import "./style.css"
 import Avaliacao from "../Avaliacao";
 
-const Receita = ({ nome, ingredientes, instrucoes }: IReceita) => {
+interface Props {
+    id: number,
+    nome: string,
+    ingredientes: {
+        nome: string,
+        quantidade: number,
+        medida: string
+    }[],
+    instrucoes: string[],
+    aoDeletar: (id: number) => void,
+    aoEditar: (id: number) => void
+}
+
+
+const Receita = ({id, nome, ingredientes, instrucoes, aoDeletar, aoEditar }: Props) => {
     return (
         <article className="receita">
             <h2>{nome}</h2>
@@ -21,7 +36,10 @@ const Receita = ({ nome, ingredientes, instrucoes }: IReceita) => {
             </ol>
             <div className="receita-rodape">
                 <Avaliacao/>
-                <FaRegTrashAlt />
+                <div>
+                    <BiEditAlt onClick={() => aoEditar(id)}/>
+                    <FaRegTrashAlt onClick={() => aoDeletar(id)}/>
+                </div>
             </div>
         </article>
     )

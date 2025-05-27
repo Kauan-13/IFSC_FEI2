@@ -1,11 +1,16 @@
 import "./style.css"
 
 import Receita from "../Receita";
+import Formulario from "../Formulario";
+import { useState } from "react";
 import type { IReceita } from "../../interfaces/Receita";
 
 const Principal = () => {
 
-    const receitas: IReceita[] = [{
+
+    const [receitas, setReceitas] = useState([
+    {
+        id: 1,
         nome: "Salmão Assado",
         ingredientes: [
             { nome: "Salmão", quantidade: 1, medida: "grande" },
@@ -24,7 +29,8 @@ const Principal = () => {
             "Retire do forno. Adicione a alface e sirva.",
         ],
     },
-    {
+    {   
+        id: 2,
         nome: "Tacos de Peixe",
         ingredientes: [
             { nome: "Peixe Branco", quantidade: 1, medida: "grande" },
@@ -38,18 +44,38 @@ const Principal = () => {
             "Coloque o peixe sobre as 3 tortilhas.",
             "Cubra com alface, tomates e queijo.",
         ],
-    }];
+    }])
+
+    const [receitaSelecionada, setReceitaSelecionada] = useState<IReceita | undefined>();
+
+    const apagarReceita = (id: number) => {
+        setReceitas(receitas.filter(receita => receita.id != id));
+    }
+
+    const atualizarReceita = (receita: IReceita) => {
+        setReceitas(receitas.map(r => (r.id === receita.id ? receita : r)));
+        setReceitaSelecionada(receita);
+    }
+
+    const aoEditar = (id: number) => {
+        setReceitaSelecionada(receitas.find(receita => receita.id === id));
+    }
 
     return (
         <main className="receitas">
             {receitas.map((receita, i) => (
                 <Receita 
                     key={i} 
+                    id={receita.id}
                     nome={receita.nome} 
                     ingredientes={receita.ingredientes} 
                     instrucoes={receita.instrucoes} 
+                    aoDeletar={apagarReceita}
+                    aoEditar={aoEditar}
                 />
+                
             ))}
+            <Formulario receita={receitaSelecionada} aoAtualizar={atualizarReceita}/>
         </main>
     )
 
