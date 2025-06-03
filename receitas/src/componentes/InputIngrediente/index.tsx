@@ -13,6 +13,9 @@ interface Props {
 }
 
 const InputIngrediente = ({nome, quantidade, medida, aoAtualizar}: Props) => {
+
+    
+
     return (
         <>
             <input type="text" name="nome" value={nome} onChange={(e: React.ChangeEvent<HTMLInputElement>) => aoAtualizar({nome: e.target.value, quantidade, medida})}/>
