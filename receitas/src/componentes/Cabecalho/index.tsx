@@ -1,3 +1,4 @@
+import MenuNavegacao from "../MenuNavegacao";
 import "./style.css";
 
 interface Props {
@@ -8,6 +9,7 @@ const Cabecalho = ({children}: Props) => {
     return (
         <header>
             <h1>{children}</h1>
+            <MenuNavegacao/>
         </header>
     );
 }

@@ -1,0 +1,8 @@
+.titulo-formulario {
+    display: flex;
+    justify-content: space-between;
+}
+
+.fechar-icone {
+    font-size: 30px;
+}

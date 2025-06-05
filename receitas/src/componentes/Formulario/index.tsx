@@ -1,23 +1,23 @@
-import { useContext } from "react"
-import type { IReceita } from "../../interfaces/Receita"
 import InputIngrediente from "../InputIngrediente"
-import { ReceitaContext } from "../../contextos/ReceitaContext"
+import { IoClose } from "react-icons/io5";
+import useReceita from "../../hooks/useReceita";
+import "./style.css"
 
-interface Props {
-    receita: IReceita | null
-    aoAtualizar: (r: IReceita) => void
-}
+const Formulario = () => {
 
-const Formulario = ({ aoAtualizar }: Props) => {
+    const {receitaSelecionada, setReceitaSelecionada, atualizarReceita} = useReceita();
 
-    const {receitaSelecionada} = useContext(ReceitaContext);
+    if (!receitaSelecionada) return <h2>Receita não selecionada</h2>
 
     return (
         <>
             {receitaSelecionada &&
                 <form>
-                    <h2>Editar Receita</h2>
-                    <input type="text" name="nome" value={receitaSelecionada.nome} onChange={(e: React.ChangeEvent<HTMLInputElement>) => aoAtualizar({ ...receitaSelecionada, nome: e.target.value })} />
+                    <div className="titulo-formulario">
+                        <h2>Editar Receita</h2>
+                        <IoClose className="fechar-icone" onClick={() => setReceitaSelecionada(null)}/>
+                    </div>
+                    <input type="text" name="nome" value={receitaSelecionada.nome} onChange={(e: React.ChangeEvent<HTMLInputElement>) => atualizarReceita({ ...receitaSelecionada, nome: e.target.value })} />
                     <h3>Ingredientes</h3>
                     <ul>
                         {receitaSelecionada.ingredientes.map((ingrediente, i) => (
@@ -29,7 +29,7 @@ const Formulario = ({ aoAtualizar }: Props) => {
                                     aoAtualizar={
                                         (ingredienteAtualizado) => {
                                             const ingredientes = receitaSelecionada.ingredientes.map((ing, j) => i === j ? ingredienteAtualizado : ing);
-                                            aoAtualizar({ ...receitaSelecionada, ingredientes })
+                                            atualizarReceita({ ...receitaSelecionada, ingredientes })
                                         }
                                     } />
                             </li>
@@ -41,7 +41,7 @@ const Formulario = ({ aoAtualizar }: Props) => {
                             <li key={i}>
                                 <input type="text" name="instrucao" value={instrucao} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                     const instrucoes = receitaSelecionada.instrucoes.map((inst, j) => i === j ? e.target.value : inst);
-                                    aoAtualizar({ ...receitaSelecionada, instrucoes })
+                                    atualizarReceita({ ...receitaSelecionada, instrucoes })
                                 }} />
                             </li>
                         ))}

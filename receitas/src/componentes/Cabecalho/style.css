@@ -3,6 +3,7 @@ header {
     height: 5em;
     background-color: lightblue;
 
-    line-height: 5em;
+    line-height: 2.5em;
     vertical-align: center;
+    text-align: center;
 }

@@ -8,6 +8,7 @@ const useReceita = () => {
 
     const apagarReceita = (id: number) => {
         setReceitas(receitas.filter(receita => receita.id != id));
+        receitaSelecionada ? receitaSelecionada.id === id ? setReceitaSelecionada(null) : null : null
     }
 
     const atualizarReceita = (receita: IReceita) => {
